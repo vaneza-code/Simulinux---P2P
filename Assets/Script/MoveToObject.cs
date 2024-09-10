@@ -21,7 +21,6 @@ public class MoveToObject : MonoBehaviour
     {
         //made changes with transform.position
         WireObject.transform.position = Vector3.MoveTowards(WireObject.transform.position, WireStripper.transform.position, speed);
-   
 
     }
 }

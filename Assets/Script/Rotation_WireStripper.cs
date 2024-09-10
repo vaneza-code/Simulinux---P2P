@@ -6,13 +6,17 @@ using UnityEngine.InputSystem;
 public class Rotation_WireStripper : MonoBehaviour
 {
     [SerializeField] private InputAction pressed, axis;
-    [SerializeField] private int speed = 1;
+    //[SerializeField] private int speed = 1;
 
     private Transform cam;
 
     private Vector2 rotation;
     private bool rotateAllowed;
-    
+
+    public GameObject WireStripper;
+    public GameObject WireStripperExit;
+    public float speed;
+
     private void Awake() {
         cam = Camera.main.transform;
         pressed.Enable();
@@ -34,6 +38,20 @@ public class Rotation_WireStripper : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            if (Input.GetKey(KeyCode.T)) //keyboard input
+            {
+                Debug.Log("Object Separated");
+                WireStripper.transform.position = Vector3.MoveTowards(WireStripper.transform.position, WireStripperExit.transform.position, speed);
+
+            }
+        }
+
     }
 
 }
